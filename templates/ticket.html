@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Support Tickets</h1>
+<form method="post">
+    {% csrf_token %}
+    <!-- You would use a Django form to handle the creation of a new support ticket. -->
+    <button type="submit">Submit Ticket</button>
+</form>
+<!-- You would use a Django template for loop to display each support ticket. -->
+{% endblock %}
