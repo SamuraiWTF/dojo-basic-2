@@ -5,11 +5,24 @@
     <!-- Add any other head content here -->
 </head>
 <body>
-    <!-- Add your header and navigation here -->
+<!-- Add your header and navigation here -->
+<nav>
+    <a href="{% url 'home' %}">Home</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'blog' %}">Blog</a>
+        <!-- More navigation links for authenticated users -->
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <!-- More navigation links for unauthenticated users -->
+    {% endif %}
+</nav>
 
-    {% block content %}
-    {% endblock %}
 
-    <!-- Add your footer here -->
+{% block content %}
+{% endblock %}
+
+<!-- Add your footer here -->
 </body>
 </html>
