@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, ProfileForm, LoginForm
@@ -26,6 +26,9 @@ def login_view(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
+def logout_view(request):
+    auth_logout(request)
+    return redirect('home')
 
 def register(request):
     if request.method == 'POST':
