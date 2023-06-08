@@ -8,22 +8,55 @@
 
     <!-- Bootstrap CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <title>Dojo Basic 2</title>
 </head>
 <body>
 <!-- Add your header and navigation here -->
-<nav>
-    <a href="{% url 'home' %}">Home</a>
-    {% if user.is_authenticated %}
-        <a href="{% url 'profile' %}">Profile</a>
-        <a href="{% url 'blog' %}">Blog</a>
-        <a href="{% url 'logout' %}">Logout</a>
-        <!-- More navigation links for authenticated users -->
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'register' %}">Register</a>
-        <!-- More navigation links for unauthenticated users -->
-    {% endif %}
+<nav class="navbar navbar-expand bg-body-tertiary">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Dojo Basic 2.0</span>
+        {#        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"#}
+        {#                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">#}
+        {#            <span class="navbar-toggler-icon"></span>#}
+        {#        </button>#}
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav nav-pills">
+                {% url 'home' as home_url %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == home_url %}active{% endif %}"
+                       href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Home</a>
+                </li>
+
+
+                {% if user.is_authenticated %}
+                    {% url 'blog' as blog_url %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == blog_url %}active{% endif %}" href="{% url 'blog' %}"><i class="fa-solid fa-pen-to-square"></i> Blog</a>
+                    </li>
+
+                {% else %}
+
+                    <!-- More navigation links for unauthenticated users -->
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- Right elements -->
+        <a class="link-secondary me-3" href="#">
+            <ul class="nav">
+                {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a>
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i> Logout</a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                {% endif %}
+            </ul>
+
+        </a>
+    </div>
 </nav>
 
 
